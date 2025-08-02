@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🌴 Planeta City Roleplay - Oficial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  *{margin:0; padding:0; box-sizing:border-box;}
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg,#6CC4FF,#003B8A);
+    color: #f1f1f1;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 10px;
+  }
+  header {
+    background: #00A2FF;
+    width: 100%; max-width: 1000px;
+    padding: 20px; text-align: center;
+    font-size: 2.5rem; font-weight: 700;
+    color: #fff; border-radius: 10px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px #0008;
+    user-select:none;
+  }
+  nav {
+    background: #003B8A;
+    width: 100%; max-width: 1000px;
+    display: flex; justify-content: center; gap: 20px;
+    border-radius: 10px; margin-bottom: 25px; padding: 10px 0;
+    box-shadow: 0 0 10px #003B8Aaa;
+    user-select:none;
+  }
+  nav a, nav button {
+    color: #B8DFFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease,color 0.3s ease;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+  nav a:hover, nav button:hover {
+    background: #00A2FF;
+    color: #fff;
+    box-shadow: 0 0 10px #00a2ffcc;
+  }
+  main {
+    background: #004cbbcc;
+    width: 100%; max-width: 1000px;
+    border-radius: 15px;
+    padding: 25px 30px;
+    box-shadow: 0 0 20px #003B8Aaa;
+    overflow-y: auto;
+    flex-grow: 1;
+    user-select:none;
+  }
+  section {
+    margin-bottom: 30px;
+  }
+  section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #00A2FF;
+    padding-bottom: 5px;
+  }
+
+  /* Compatibilidad */
+  .compatibilidad-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-around;
+  }
+  .compatibilidad-card {
+    background: #0073e6cc;
+    flex: 1 1 320px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #004cbbaa;
+  }
+  .compatibilidad-card h3 {
+    margin-bottom: 12px;
+    color: #d1e7ff;
+    font-weight: 700;
+  }
+  .compatibilidad-card ul {
+    list-style: none;
+    line-height: 1.5;
+    color: #bcd9ff;
+  }
+  .compatibilidad-card ul li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+  }
+  .compatibilidad-card ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #a0d911;
+    font-weight: 700;
+  }
+
+  /* Creador contenido */
+  .creador-contenido {
+    background: #0055cccc;
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: #dbe9ff;
+    box-shadow: 0 0 12px #00397a88;
+  }
+
+  /* Login/Register/Profile */
+  .auth-container, .profile-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+    background: #0066ddcc;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #003a8a88;
+  }
+  .auth-container input, .profile-container button, .auth-container button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: #00a2ff;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  .auth-container input::placeholder {
+    color: #c3e0ff;
+  }
+  .auth-container button:hover, .profile-container button:hover {
+    background: #0081cc;
+  }
+  .auth-toggle {
+    margin-top: 12px;
+    text-align: center;
+    color: #c3e0ff;
+    cursor: pointer;
+    user-select:none;
+  }
+  .message {
+    margin-top: 12px;
+    color: #a8e6a1;
+    font-weight: 700;
+    min-height: 22px;
+  }
+  .profile-container p {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .profile-container hr {
+    margin: 15px 0;
+    border-color: #00a2ff55;
+  }
+
+  /* Chat y amigos */
+  .chat-amigos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .chat-box, .amigos-box {
+    background: #0066ddcc;
+    flex: 1 1 400px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #003a8a88;
+    color: #ddeeff;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+  }
+  .chat-mensajes {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: #004294cc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 5px #003060;
+    white-space: pre-wrap;
+  }
+  .chat-input-container {
+    display: flex;
+    gap: 10px;
+  }
+  .chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  .btn {
+    background: #00a2ff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn:hover {
+    background: #0081cc;
+  }
+  .lista-amigos {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: #004294cc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.95rem;
+    box-shadow: inset 0 0 5px #003060;
+  }
+  .amigo {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: #0073e6cc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .amigo.online {
+    border-left: 6px solid #6ad400;
+  }
+  .amigo:hover {
+    background: #0085ffcc;
+  }
+
+  /* Responsive */
+  @media(max-width:900px){
+    .chat-amigos {
+      flex-direction: column;
+    }
+    .chat-box, .amigos-box {
+      max-height: 300px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>🌴 Planeta City Roleplay 🌴</header>
+
+  <nav id="navLoggedOut">
+    <a href="#" id="showLoginBtn">Iniciar Sesión</a>
+    <a href="#" id="showRegisterBtn">Crear Cuenta</a>
+    <a href="#">Compatibilidad</a>
+  </nav>
+
+  <nav id="navLoggedIn" style="display:none;">
+    <a href="#" id="navPerfil">Perfil</a>
+    <a href="#" id="navJugadores">Jugadores</a>
+    <a href="#" id="navRangos">Solicitar Rango</a>
+    <a href="#" id="navReportes">Reportes</a>
+     <a href="#">Compatibilidad</a>
+    <a href="#" id="navCerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+<main>
+
+  <!-- Login -->
+  <section class="auth-container" id="loginSection">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="loginUser" placeholder="Usuario" autocomplete="off" />
+    <input type="password" id="loginPass" placeholder="Contraseña" autocomplete="off" />
+    <button id="btnLogin">Entrar</button>
+    <p class="auth-toggle">¿No tienes cuenta? <span id="goToRegister" style="color:#00a2ff; cursor:pointer;">Regístrate aquí</span></p>
+    <p class="message" id="loginMessage"></p>
+  </section>
+
+  <!-- Registro -->
+  <section class="auth-container" id="registerSection" style="display:none;">
+    <h2>Crear Cuenta</h2>
+    <input type="text" id="regUser" placeholder="Usuario" autocomplete="off" />
+    <input type="password" id="regPass" placeholder="Contraseña" autocomplete="off" />
+    <button id="btnRegister">Registrar</button>
+    <p class="auth-toggle">¿Ya tienes cuenta? <span id="goToLogin" style="color:#00a2ff; cursor:pointer;">Inicia sesión aquí</span></p>
+    <p class="message" id="registerMessage"></p>
+  </section>
+
+  <!-- Perfil -->
+  <section class="profile-container" id="profileSection" style="display:none;">
+    <h2>👤 Perfil de <span id="profileUser"></span></h2>
+    <p>Monedas: <span id="profileCoins"></span></p>
+    <p>Cuenta creada: <span id="profileCreated"></span></p>
+    <p>Verificado: <span id="profileVerified"></span></p>
+    <hr />
+    <h3>Comprar Monedas</h3>
+    <button id="btnVerVideo">Ver video y ganar 10 monedas (5s)</button>
+    <h3>Comprar Gamepass</h3>
+    <button id="btnComprarGP">Comprar Gamepass)</button>
+    <p class="message" id="profileMessage"></p>
+  </section>
+
+  <!-- Compatibilidad -->
+  <section id="compatibilidadSection" style="display:none;">
+    <h2>Compatibilidad con Teléfonos</h2>
+    <div class="compatibilidad-container">
+      <div class="compatibilidad-card">
+        <h3>Teléfonos Gama Alta</h3>
+        <ul>
+          <li>Samsung Galaxy S22, S23, Note 20+</li>
+          <li>iPhone 13, 14, 15</li>
+          <li>Google Pixel 7, 8</li>
+          <li>RAM: 6GB o más</li>
+          <li>Sistema operativo: Android 11+ / iOS 15+</li>
+          <li>Experiencia fluida y gráficos altos</li>
+        </ul>
+      </div>
+      <div class="compatibilidad-card">
+        <h3>Teléfonos Gama Media</h3>
+        <ul>
+          <li>Xiaomi Redmi Note 11, Poco X5</li>
+          <li>Samsung A52, A72</li>
+          <li>Motorola G Power, G Stylus</li>
+          <li>RAM: 4GB mínimo</li>
+          <li>Sistema operativo: Android 10+</li>
+          <li>Gráficos medios, buena jugabilidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 style="margin-top:40px;">Compatibilidad con PC</h2>
+    <div class="compatibilidad-container">
+      <div class="compatibilidad-card">
+        <h3>PC Gama Alta</h3>
+        <ul>
+          <li>Procesador: Intel i7 o Ryzen 7</li>
+          <li>RAM: 16GB o más</li>
+          <li>GPU: Nvidia RTX 3060+ o equivalente</li>
+          <li>Sistema operativo: Windows 10/11 64-bit</li>
+          <li>Experiencia con gráficos máximos y FPS altos</li>
+        </ul>
+      </div>
+      <div class="compatibilidad-card">
+        <h3>PC Gama Media</h3>
+        <ul>
+          <li>Procesador: Intel i5 o Ryzen 5</li>
+          <li>RAM: 8GB mínimo</li>
+          <li>GPU: Nvidia GTX 1050 Ti o equivalente</li>
+          <li>Sistema operativo: Windows 10 64-bit</li>
+          <li>Gráficos medios y buen rendimiento</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creador contenido -->
+  <section class="creador-contenido" id="creadorSection" style="display:none;">
+    <h2>👑 ¿Eres Creador de Contenido?</h2>
+    <p>Si tienes un canal de YouTube, Twitch o TikTok y quieres colaborar con nosotros, contáctanos para obtener beneficios exclusivos y un estado especial dentro de Planeta City Roleplay.</p>
+    <button id="btnContactoCC" class="btn">Contactar</button>
+  </section>
+
+  <!-- Chat y amigos -->
+  <section class="chat-amigos" id="chatAmigosSection" style="display:none;">
+    <div class="chat-box">
+      <h2>💬 Chat Online</h2>
+      <div id="chatMensajes" class="chat-mensajes"></div>
+      <div class="chat-input-container">
+        <input id="chatInput" type="text" placeholder="Escribe un mensaje..." maxlength="200" />
+        <button id="btnEnviar" class="btn">Enviar</button>
+      </div>
+    </div>
+    <div class="amigos-box">
+      <h2>👥 Amigos Online</h2>
+      <div id="listaAmigos" class="lista-amigos"></div>
+      <input id="nuevoAmigoInput" type="text" placeholder="Agregar amigo por nombre" />
+      <button id="btnAgregarAmigo" class="btn">Agregar Amigo</button>
+    </div>
+  </section>
+
+  <!-- Simulación otras páginas -->
+  <section id="paginaSimulada" style="display:none; max-width:700px; margin:auto; text-align:center;">
+    <h2 id="paginaTitulo"></h2>
+    <p id="paginaContenido"></p>
+    <button id="btnVolverInicio" class="btn" style="margin-top:20px;">Volver al Inicio</button>
+  </section>
+
+  <!-- Próximamente -->
+  <section id="proximamenteSection" style="margin-top:30px; max-width: 700px; text-align:center; font-size:1.2rem; user-select:none;">
+    <strong>🎮 ¡Próximamente disponible en Roblox! 🎮</strong>
+  </section>
+
+</main>
+
+<script>
+  // --- Variables UI ---
+  const loginSection = document.getElementById('loginSection');
+  const registerSection = document.getElementById('registerSection');
+  const profileSection = document.getElementById('profileSection');
+  const compatibilidadSection = document.getElementById('compatibilidadSection');
+  const creadorSection = document.getElementById('creadorSection');
+  const chatAmigosSection = document.getElementById('chatAmigosSection');
+  const paginaSimulada = document.getElementById('paginaSimulada');
+  const paginaTitulo = document.getElementById('paginaTitulo');
+  const paginaContenido = document.getElementById('paginaContenido');
+  const btnVolverInicio = document.getElementById('btnVolverInicio');
+  const navLoggedOut = document.getElementById('navLoggedOut');
+  const navLoggedIn = document.getElementById('navLoggedIn');
+
+  const loginUser = document.getElementById('loginUser');
+  const loginPass = document.getElementById('loginPass');
+  const btnLogin = document.getElementById('btnLogin');
+  const loginMessage = document.getElementById('loginMessage');
+
+  const regUser = document.getElementById('regUser');
+  const regPass = document.getElementById('regPass');
+  const btnRegister = document.getElementById('btnRegister');
+  const registerMessage = document.getElementById('registerMessage');
+
+  const profileUser = document.getElementById('profileUser');
+  const profileCoins = document.getElementById('profileCoins');
+  const profileCreated = document.getElementById('profileCreated');
+  const profileVerified = document.getElementById('profileVerified');
+  const profileMessage = document.getElementById('profileMessage');
+
+  let currentUser = null;
+
+  // --- Funciones de usuarios ---
+  function getUsers() {
+    const users = localStorage.getItem('users');
+    return users ? JSON.parse(users) : {};
+  }
+
+  function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  function userExists(username) {
+    const users = getUsers();
+    return users.hasOwnProperty(username.toLowerCase());
+  }
+
+  function createUser(username, password) {
+    const users = getUsers();
+    if(userExists(username)) return false;
+    users[username.toLowerCase()] = {
+      username: username,
+      password: password,
+      coins: 0,
+      createdAt: new Date().toISOString(),
+      verified: false,
+      gamepasses: []
+    };
+    saveUsers(users);
+    return true;
+  }
+
+  function validateLogin(username, password) {
+    const users = getUsers();
+    const user = users[username.toLowerCase()];
+    if(user && user.password === password) return user;
+    return null;
+  }
+
+  function updateUser(user) {
+    const users = getUsers();
+    users[user.username.toLowerCase()] = user;
+    saveUsers(users);
+  }
+
+  // --- Mostrar/Ocultar secciones ---
+  function showSection(section) {
+    // Ocultar todo
+    [loginSection, registerSection, profileSection, compatibilidadSection, creadorSection, chatAmigosSection, paginaSimulada].forEach(s => s.style.display = 'none');
+    section.style.display = 'block';
+  }
+
+  function showLoggedInUI() {
+    navLoggedOut.style.display = 'none';
+    navLoggedIn.style.display = 'flex';
+  }
+
+  function showLoggedOutUI() {
+    navLoggedOut.style.display = 'flex';
+    navLoggedIn.style.display = 'none';
+  }
+
+  // --- Actualizar perfil en UI ---
+  function updateProfileUI(user) {
+    profileUser.textContent = user.username;
+    profileCoins.textContent = user.coins;
+    profileCreated.textContent = new Date(user.createdAt).toLocaleDateString();
+    profileVerified.textContent = user.verified ? 'Sí' : 'No';
+    profileMessage.textContent = '';
+  }
+
+  // --- Manejo botones ---
+  btnRegister.onclick = () => {
+    const username = regUser.value.trim();
+    const password = regPass.value.trim();
+    registerMessage.style.color = '#a8e6a1';
+
+    if(username.length < 3) {
+      registerMessage.textContent = 'El usuario debe tener al menos 3 caracteres.';
+      return;
+    }
+    if(password.length < 4) {
+      registerMessage.style.color = '#ff7a7a';
+      registerMessage.textContent = 'La contraseña debe tener al menos 4 caracteres.';
+      return;
+    }
+    if(userExists(username)) {
+      registerMessage.style.color = '#ff7a7a';
+      registerMessage.textContent = 'El usuario ya existe.';
+      return;
+    }
+    const created = createUser(username, password);
+    if(created) {
+      registerMessage.textContent = 'Cuenta creada con éxito. Ahora inicia sesión.';
+      regUser.value = '';
+      regPass.value = '';
+    } else {
+      registerMessage.style.color = '#ff7a7a';
+      registerMessage.textContent = 'Error al crear cuenta.';
+    }
+  };
+
+  btnLogin.onclick = () => {
+    const username = loginUser.value.trim();
+    const password = loginPass.value.trim();
+    loginMessage.style.color = '#a8e6a1';
+
+    if(!username || !password) {
+      loginMessage.style.color = '#ff7a7a';
+      loginMessage.textContent = 'Por favor completa todos los campos.';
+      return;
+    }
+
+    const user = validateLogin(username, password);
+    if(user) {
+      currentUser = user;
+      updateProfileUI(user);
+      showSection(profileSection);
+      showLoggedInUI();
+      loginUser.value = '';
+      loginPass.value = '';
+      loginMessage.textContent = '';
+    } else {
+      loginMessage.style.color = '#ff7a7a';
+      loginMessage.textContent = 'Usuario o contraseña incorrectos.';
+    }
+  };
+
+  // Cambiar vistas login/registro
+  document.getElementById('goToRegister').onclick = () => {
+    showSection(registerSection);
+    registerMessage.textContent = '';
+  };
+  document.getElementById('goToLogin').onclick = () => {
+    showSection(loginSection);
+    loginMessage.textContent = '';
+  };
+
+  // Navegación del menú cuando estás logueado
+  document.getElementById('navPerfil').onclick = (e) => {
+    e.preventDefault();
+    if(currentUser) {
+      updateProfileUI(currentUser);
+      showSection(profileSection);
+      profileMessage.textContent = '';
+    }
+  };
+  document.getElementById('navJugadores').onclick = (e) => {
+    e.preventDefault();
+    showSimulatedPage('Jugadores Conectados', 'Aquí se mostrarán los jugadores conectados en tiempo real.');
+  };
+  document.getElementById('navRangos').onclick = (e) => {
+    e.preventDefault();
+    showSimulatedPage('Solicitar Rangos', 'Formulario para solicitar rangos como policía, médico, mecánico y más.');
+  };
+  document.getElementById('navReportes').onclick = (e) => {
+    e.preventDefault();
+    showSimulatedPage('Reportes y Sugerencias', 'Aquí podrás reportar bugs y enviar sugerencias para mejorar el juego.');
+  };
+  document.getElementById('navCerrarSesion').onclick = (e) => {
+    e.preventDefault();
+    logoutUser();
+  };
+
+  // Botón volver inicio en página simulada
+  btnVolverInicio.onclick = () => {
+    showSection(profileSection);
+  };
+
+  // --- Función mostrar página simulada ---
+  function showSimulatedPage(titulo, contenido) {
+    paginaTitulo.textContent = titulo;
+    paginaContenido.textContent = contenido;
+    showSection(paginaSimulada);
+  }
+
+  // --- Logout ---
+  function logoutUser() {
+    currentUser = null;
+    showLoggedOutUI();
+    showSection(loginSection);
+  }
+
+  // --- Comprar monedas con "ver video" ---
+  document.getElementById('btnVerVideo').onclick = () => {
+    if(!currentUser) return;
+    profileMessage.style.color = '#fff';
+    profileMessage.textContent = 'Ve el video... (5 segundos)';
+    // Simular video con timeout
+    setTimeout(() => {
+      currentUser.coins += 10;
+      updateUser(currentUser);
+      updateProfileUI(currentUser);
+      profileMessage.style.color = '#a8e6a1';
+      profileMessage.textContent = '¡Ganaste 10 monedas!';
+    }, 5000);
+  };
+
+  // --- Comprar Gamepass ---
+  document.getElementById('btnComprarGP').onclick = () => {
+    if(!currentUser) return;
+    if(currentUser.coins < 50){
+      profileMessage.style.color = '#ff7a7a';
+      profileMessage.textContent = 'No tienes suficientes monedas para comprar el gamepass.';
+      return;
+    }
+    if(currentUser.gamepasses.includes('gamepass1')){
+      profileMessage.style.color = '#a8e6a1';
+      profileMessage.textContent = 'Ya tienes este gamepass comprado.';
+      return;
+    }
+    currentUser.coins -= 50;
+    currentUser.gamepasses.push('gamepass1');
+    updateUser(currentUser);
+    updateProfileUI(currentUser);
+    profileMessage.style.color = '#a8e6a1';
+    profileMessage.textContent = 'Gamepass comprado con éxito.';
+  };
+
+  // --- Contacto creadores ---
+  document.getElementById('btnContactoCC').onclick = () => {
+    alert('Contáctanos en Discord: https://discord.gg/7euDYe7Hgu');
+  };
+
+  // --- Chat y Amigos (demo localStorage) ---
+  const chatMensajes = document.getElementById('chatMensajes');
+  const chatInput = document.getElementById('chatInput');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const listaAmigos = document.getElementById('listaAmigos');
+  const nuevoAmigoInput = document.getElementById('nuevoAmigoInput');
+  const btnAgregarAmigo = document.getElementById('btnAgregarAmigo');
+
+  function cargarChat() {
+    const mensajes = JSON.parse(localStorage.getItem('chatMensajes')) || [];
+    chatMensajes.innerHTML = '';
+    mensajes.forEach(msg => {
+      const div = document.createElement('div');
+      div.textContent = `[${msg.hora}] ${msg.usuario}: ${msg.texto}`;
+      chatMensajes.appendChild(div);
+    });
+    chatMensajes.scrollTop = chatMensajes.scrollHeight;
+  }
+
+  function guardarMensaje(usuario, texto) {
+    const mensajes = JSON.parse(localStorage.getItem('chatMensajes')) || [];
+    const hora = new Date().toLocaleTimeString();
+    mensajes.push({usuario, texto, hora});
+    localStorage.setItem('chatMensajes', JSON.stringify(mensajes));
+  }
+
+  function cargarAmigos() {
+    const amigos = JSON.parse(localStorage.getItem('amigosLista')) || [];
+    listaAmigos.innerHTML = '';
+    amigos.forEach(nombre => {
+      const div = document.createElement('div');
+      div.className = 'amigo online';
+      div.textContent = nombre;
+      listaAmigos.appendChild(div);
+    });
+  }
+
+  btnAgregarAmigo.onclick = () => {
+    const nombre = nuevoAmigoInput.value.trim();
+    if(!nombre) return alert('Ingresa el nombre del amigo');
+    let amigos = JSON.parse(localStorage.getItem('amigosLista')) || [];
+    if(amigos.includes(nombre)) return alert('Este amigo ya está agregado');
+    amigos.push(nombre);
+    localStorage.setItem('amigosLista', JSON.stringify(amigos));
+    nuevoAmigoInput.value = '';
+    cargarAmigos();
+  };
+
+  btnEnviar.onclick = () => {
+    const texto = chatInput.value.trim();
+    if(!texto) return;
+    if(!currentUser) return alert('Debes iniciar sesión para enviar mensajes');
+    guardarMensaje(currentUser.username, texto);
+    cargarChat();
+    chatInput.value = '';
+  };
+
+  function mostrarSeccionesLogueado() {
+    showSection(profileSection);
+    compatibilidadSection.style.display = 'block';
+    creadorSection.style.display = 'block';
+    chatAmigosSection.style.display = 'flex';
+  }
+
+  function mostrarSeccionesLoggedOut() {
+    compatibilidadSection.style.display = 'none';
+    creadorSection.style.display = 'none';
+    chatAmigosSection.style.display = 'none';
+  }
+
+  // --- Al cargar la página ---
+  window.onload = () => {
+    if(currentUser) {
+      showLoggedInUI();
+      updateProfileUI(currentUser);
+      mostrarSeccionesLogueado();
+      showSection(profileSection);
+    } else {
+      showLoggedOutUI();
+      mostrarSeccionesLoggedOut();
+      showSection(loginSection);
+    }
+    cargarChat();
+    cargarAmigos();
+  };
+
+  // --- Manejo botones para cambiar vistas login/register ---
+  document.getElementById('showLoginBtn').onclick = (e) => {
+    e.preventDefault();
+    showSection(loginSection);
+    loginMessage.textContent = '';
+  };
+  document.getElementById('showRegisterBtn').onclick = (e) => {
+    e.preventDefault();
+    showSection(registerSection);
+    registerMessage.textContent = '';
+  };
+  </script>
+
+  </body>
+  </html>
